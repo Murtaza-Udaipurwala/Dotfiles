@@ -1,0 +1,8 @@
+{
+  "boiler code": {
+    "scope": "cpp",
+    "prefix": "boiler",
+    "body": ["#include<iostream>\n", "using namespace std;\n", "int main(){", "\t${1:/* code */}", "\treturn 0;", "}"],
+    "description": "Boiler code"
+  }
+}

@@ -1,0 +1,4 @@
+#!/bin/env bash
+
+result=$(ping -q -c 1 archlinux.org >&/dev/null; echo $?)
+[ $((result)) -eq 0 ] && echo 1 || echo 0

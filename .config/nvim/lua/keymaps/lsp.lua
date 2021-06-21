@@ -1,0 +1,20 @@
+-- lsp
+Map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+Map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {noremap = true, silent = true})
+Map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
+Map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+Map('n', 'gr', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})
+Map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
+Map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+
+-- compe
+Map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+Map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+Map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+Map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<TAB>"', {noremap = true, silent = true, expr = true})
+Map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-TAB>"', {noremap = true, silent = true, expr = true})
+Map('i', '<C-Space>', 'compe#complete()', {noremap = true, silent = true, expr = true})
+Map('i', '<CR>', 'compe#confirm(\'<CR>\')', {noremap = true, silent = true, expr = true})
+Map('i', '<C-e>', 'compe#close(\'<C-e>\')', {noremap = true, silent = true, expr = true})
+Map('i', '<C-f>', 'compe#scroll({ \'delata\': +4 })', {noremap = true, silent = true, expr = true})
+Map('i', '<C-b>', 'compe#scroll({ \'delata\': -4 })', {noremap = true, silent = true, expr = true})

@@ -1,0 +1,21 @@
+#!/bin/sh
+capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+
+if [ "$capacity" -ge 80 ]
+then
+    symbol="  "
+
+elif [ "$capacity" -ge 60 ]
+then
+    symbol="  "
+
+elif [ "$capacity" -ge 40 ]
+then
+    symbol="  "
+
+elif [ "$capacity" -ge 10 ]
+then
+    symbol="  "
+fi
+echo "$symbol $capacity%"
+unset symbol

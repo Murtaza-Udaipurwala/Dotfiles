@@ -1,0 +1,22 @@
+# MS Word documents
+application/msword; zaread %s
+application/vnd.oasis.opendocument.text; zaread %s
+application/vnd.ms-excel; zaread %s
+application/vnd.openxmlformats-officedocument.presentationml.presentation; zaread %s
+
+# HTML
+text/html; brave %s ; nametemplate=%s.html
+text/html; brave -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput;
+text/plain; nvim %s ;
+
+# PDFs
+application/pdf; /usr/bin/zathura %s ;
+
+# Images
+image/*; /usr/bin/sxiv %s ;
+
+# Audio
+audio/*; mpv %s ;
+
+# Video
+video/*; setsid mpv --quiet %s &;

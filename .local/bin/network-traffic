@@ -1,0 +1,11 @@
+#!/bin/sh
+
+logfile="$HOME/.cache/netlog"
+prev="$(cat "$logfile")"
+currRx="$(cat /sys/class/net/wlp1s0/statistics/rx_bytes)"
+currTx="$(cat /sys/class/net/wlp1s0/statistics/tx_bytes)"
+printf "🔻%sKib 🔺%sKib" \
+    "$(((currRx-${prev%% *})/1024))" \
+    "$(((currTx-${prev##* })/1024))"
+
+echo "$currRx $currTx" > "$logfile"

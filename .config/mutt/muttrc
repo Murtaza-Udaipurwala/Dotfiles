@@ -1,0 +1,13 @@
+# vim: filetype=muttrc
+
+# private
+source ~/.config/mutt/private
+
+# settings
+source ~/.config/mutt/settings
+
+# Key bindings
+source ~/.config/mutt/mappings
+
+# Colors
+source ~/.config/mutt/colors

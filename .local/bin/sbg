@@ -1,0 +1,71 @@
+#!/bin/sh
+
+location="$HOME/pix/wallpapers/" # location of your wallpapers directory
+cache="$HOME/.cache/wall"
+
+help(){
+    printf "
+    ## Usage
+    run sbg without any argument to select a wallpaper from %s\n
+    sbg [optional arguments]
+    -h\tDisplays this help menu
+    -d\tdraws the wallpaper at startx. Add 'sbg -d' in your xinitrc
+    -r\trandomly selects a wallpaper
+    -i\tGo insane
+" $location
+}
+
+change(){
+    xwallpaper --stretch "$1" 2>/dev/null
+}
+
+shuffle(){
+    local wallpaper="$(ls "$location" | shuf -n 1)"
+    echo "$location/$wallpaper"
+}
+
+setbg(){
+    local wallpaper="$(sxiv -b -t -o "$location")"
+    echo "$wallpaper" > "$cache"
+    change "$wallpaper"
+}
+
+draw(){
+    change "$(cat "$cache")"
+}
+
+random(){
+    local wallpaper="$(shuffle)"
+    echo "$wallpaper" > "$cache"
+    change "$wallpaper"
+}
+
+goInsane(){
+    while true; do
+        local wallpaper="$(shuffle)"
+        change "$wallpaper"
+        sleep 1s
+    done
+}
+
+menu(){
+    local input=$(printf "set background\nrandom\ngo insane" | dmenu -i -l 3) || exit
+    case "$input" in
+        "set background") setbg ;;
+        "random") random ;;
+        "go insane") goInsane ;;
+    esac
+}
+
+noOpt=1
+while getopts "hdrim" arg 2>/dev/null; do
+    case "${arg}" in
+        h) help ;;
+        d) draw ;;
+        r) random ;;
+        i) goInsane ;;
+        *) printf "invalid option\nType sbg -h for help" ;;
+    esac
+    noOpt=0
+done
+[ "$noOpt" = "1" ] && menu

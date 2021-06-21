@@ -1,0 +1,23 @@
+#!/bin/sh
+
+url="$(printf "duckduckgo-https://duckduckgo.com/?q=
+youtube-https://www.youtube.com/results?search_query=
+wiby.me-https://wiby.me/?q=
+archwiki-https://wiki.archlinux.org/index.php?search=
+archpkg-https://archlinux.org/packages/?sort=&q=
+aur-https://aur.archlinux.org/packages/?O=0&K=
+learnxinyminutes-https://learnxinyminutes.com/docs/
+stackoverflow-https://stackoverflow.com/search?q=
+reddit-https://www.reddit.com/search/?q=
+github-https://github.com/search?q=
+gitlab-https://gitlab.com/search?search=
+wikipedia-https://en.wikipedia.org/wiki/
+urban-https://www.urbandictionary.com/define.php?term=
+google-https://www.google.com/search?q=
+google image-https://www.google.com/search?hl=en&tbm=isch&q=
+google news-https://news.google.com/search?q=
+amazon-https://www.amazon.com/s?k=")"
+
+engine="$(printf "$url" | cut -d'-' -f1 | dmenu -i -l 20 -p 'Choose search engine:')" || exit
+query="$(echo | dmenu -i -p "Searching $engine")" || exit
+"$BROWSER" "$(printf "$url" | grep "^$engine" | cut -d'-' -f2)$query"

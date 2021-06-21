@@ -1,0 +1,4 @@
+#!/bin/sh
+
+chosen="$(cat "$HOME"/.local/share/Bookmarks | dmenu -i -l 30)" || exit
+$BROWSER "$chosen"

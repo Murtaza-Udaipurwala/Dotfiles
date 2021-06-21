@@ -1,0 +1,2 @@
+#!/bin/sh
+printf "🌡%s" "$(sensors | awk '/^Tdie/ { print $2 }')"

@@ -1,0 +1,56 @@
+#!/bin/sh
+
+# script name: dm-pacman
+# Description: A software store using dmenu
+# Dependencies : dmenu
+# Contributors: Murtaza Udaipurwala
+
+packageList="$HOME/.cache/packageList"
+
+refresh(){
+    # only update the packageList once a day
+    [ "$(stat -c %y "$packageList" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
+        pacman -Si |
+        awk '/^Name/{name=$3} /^Description/{sub(/^.{18}/,"", $0); print name, " => ", $0}' > "$HOME"/.cache/packageList
+}
+
+confirm(){
+    answer="$(printf "No\nYes" | dmenu -i -p "$1")" || exit
+    [ "$answer" = "No" ] && exit
+}
+
+install(){
+    refresh
+    package="$(cat "$packageList" | dmenu -i -l 30 -p "Package to install")" || exit
+    confirm "Install this package?"
+    $TERMINAL -e sudo pacman -S --noconfirm "$(echo "$package" | cut -d'=' -f1)"
+}
+
+remove(){
+    package="$(pacman -Qeq | dmenu -i -l 30 -p "Package to remove")" || exit
+    confirm "Remove this package?"
+    $TERMINAL sudo pacman -Rns --noconfirm "$package"
+}
+
+update(){
+    confirm "Update the system?"
+    sudo pacman -Syu --noconfirm
+}
+
+cleanUp(){
+    [ "$(pacman -Qdtq)" = "" ] && exit
+    $TERMINAL -e sudo pacman -Rns --noconfirm "$(pacman -Qdtq)"
+}
+
+menu(){
+    operation="$(printf "install\nremove\nupdate\nremove orphan packages" | dmenu -i -l 4 -p "Select operation")" || exit
+    case "$operation" in
+        "install") install ;;
+        "remove") remove ;;
+        "update") update ;;
+        "remove orphan packages") cleanUp ;;
+        *) echo "invalid operation" && exit ;;
+    esac
+}
+
+menu

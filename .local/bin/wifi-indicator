@@ -1,0 +1,2 @@
+#!/bin/sh
+[ "$(nmcli radio wifi)" = "disabled" ] && echo "睊 " || echo " "

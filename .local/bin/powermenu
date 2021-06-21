@@ -1,0 +1,11 @@
+#!/bin/sh
+
+chosen="$(printf "lock screen\nshutdown\nreboot\nlogout\nsuspend\nhybrid sleep" | dmenu -i )" || exit
+case "$chosen" in
+    "lock screen") slock ;;
+    "shutdown") systemctl poweroff ;;
+    "reboot") systemctl reboot ;;
+    "logout") killall dwm || killall openbox ;;
+    "suspend") systemctl suspend ;;
+    "hybrid sleep") systemctl hybrid-sleep ;;
+esac

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+info="$HOME/.cache/corona-info"
+
+[ "$(stat -c %y "$info" 2>/dev/null | cut -d' ' -f1)" != "$(date '+%Y-%m-%d')" ] &&
+    [ "$(ci)" = 1 ] &&
+    curl -s "https://corona-stats.online" > "$info"
+
+head -23 "$info" # top 10 countries

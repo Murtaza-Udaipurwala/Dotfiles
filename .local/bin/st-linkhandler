@@ -1,0 +1,18 @@
+#!/bin/sh
+
+urlregex="(((http|https|gopher|gemini|ftp|ftps|git)://|www\\.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@$&%?$\#=_~-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)"
+
+urls="$(sed 's/.*│//g' | tr -d '\n' | # First remove linebreaks and mutt sidebars:
+grep -aEo "$urlregex" | # grep only urls as defined above.
+uniq | # Ignore neighboring duplicates.
+sed "s/\(\.\|,\|;\|\!\\|\?\)$//;
+s/^www./http:\/\/www\./")"
+
+[ -z "$urls" ] && exit 1
+
+while getopts "hoc" o; do case "${o}" in
+    o) chosen="$(echo "$urls" | dmenu -i -p 'Follow which url?' -l 10)" || exit
+        setsid "$BROWSER" "$chosen" >/dev/null 2>&1 & ;;
+
+    c) echo "$urls" | dmenu -i -p 'Copy which url?' -l 10 | tr -d '\n' | xclip -selection clipboard ;;
+esac done

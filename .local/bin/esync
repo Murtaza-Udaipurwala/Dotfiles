@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# check if connected to the internet
+[ "$(bash "$HOME"/.local/bin/ci)" -eq 0 ] && exit
+
+inbox="$HOME/.local/share/Mail/KJS/Inbox/new"
+before=$(find "$inbox" -type f | wc -l)
+
+# sync with remote server and download new email(if any)
+mbsync -a -q -c "$HOME"/.config/mbsyncrc 2>/dev/null
+
+after=$(find "$inbox" -type f | wc -l)
+diff=$((after-before))
+
+# notify the user incase of new email
+[ $diff -gt 0 ] &&
+    notify-send --icon=~/.config/dunst/email.png "Mail synced" "You have $diff new email(s)" ||
+    notify-send --icon=~/.config/dunst/email.png "Mail synced" "No new email"
+
+# indexing
+notmuch new > /dev/null 2>&1

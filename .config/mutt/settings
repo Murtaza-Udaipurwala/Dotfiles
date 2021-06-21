@@ -1,0 +1,21 @@
+# vim: filetype=muttrc
+
+set editor = "nvim +':set textwidth=0'"
+set header_cache = "~/.cache/mutt"
+set message_cachedir = "~/.cache/mutt"
+set sort=reverse-date
+set sort_aux=last-date-received
+set mail_check=60       # to avoid lags using IMAP with some email providers
+set sleep_time = 0		# Pause 0 seconds for informational messages
+set timeout=0
+set markers = no		# Disables the `+` displayed at line wraps
+set mark_old = no		# Unread mail stay unread until read
+set wait_key = no		# mutt won't ask "press key to continue"
+set fast_reply			# skip to compose when replying
+unset confirmappend     # don't ask, just do!
+set quit                # don't ask, just do!!
+set date_format="%y/%m/%d %I:%M%p"
+set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
+set mailcap_path = ~/.config/mutt/mailcap
+set mbox_type = Maildir
+set thorough_search

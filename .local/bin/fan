@@ -1,0 +1,2 @@
+#!/bin/sh
+printf "%s RPM" "$(sensors | awk '/^cpu_fan/ {printf $2}')"

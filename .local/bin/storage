@@ -1,0 +1,2 @@
+#!/bin/sh
+printf "📂SSD:%s" "$(df -h | awk '/\/home$/ { printf "%s/%s",$3,$2 }')"

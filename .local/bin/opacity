@@ -1,0 +1,32 @@
+#!/bin/bash
+
+curr_opacity="$(awk -F': ' '/background_opacity/ { print $2 }' "$HOME"/.config/alacritty/alacritty.yml)"
+delta="0.05"
+
+set(){
+    [ "$1" = "" ] && echo "[value missing]" || sed -i "s/background_opacity: $curr_opacity/background_opacity: $1/g" "$HOME"/.config/alacritty/alacritty.yml
+}
+
+increase(){
+    new_opacity="$(echo "$curr_opacity + $delta" | bc -l)"
+    (( $(echo "$new_opacity > 1" | bc -l) )) && new_opacity="1.0"
+    set "$new_opacity"
+}
+
+decrease(){
+    new_opacity="$(echo "$curr_opacity - $delta" | bc -l)"
+    (( $(echo "$new_opacity < 0" | bc -l) )) && new_opacity="0"
+    set "$new_opacity"
+}
+
+noOpt=1
+while getopts "sid" arg 2>/dev/null; do
+    case "${arg}" in
+        s) set "$2" ;;
+        i) increase ;;
+        d) decrease ;;
+        *) echo "invalid option" ;;
+    esac
+    noOpt=0
+done
+[ $noOpt = 1 ] && echo "$curr_opacity"

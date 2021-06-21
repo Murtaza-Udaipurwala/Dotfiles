@@ -1,0 +1,2 @@
+#!/bin/sh
+pass otp "$(pass ls | awk '/otp$/ { print $2 }' | dmenu -i)" | xclip -selection clipboard

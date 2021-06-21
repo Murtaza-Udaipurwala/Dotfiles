@@ -1,0 +1,124 @@
+#### Programs ####
+
+super + Return
+    alacritty
+
+super + shift + Return
+    dmenu_run
+
+super + alt + b
+    brave
+
+super + r
+    $TERMINAL -e newsboat
+
+super + f
+    $TERMINAL -e bash $HOME/.config/vifm/scripts/vifmrun
+
+super + g
+    pcmanfm
+
+super + n
+    $TERMINAL -e neomutt
+
+super + p
+    pavucontrol
+
+super + v
+    vscodium
+
+
+### screenshot ###
+
+Print
+    dm-scrot
+
+super + Print
+    flameshot gui
+
+
+### Audio ###
+
+{XF86AudioMute, XF86AudioLowerVolume, XF86AudioRaiseVolume}
+    {pulseaudio-ctl mute, pulseaudio-ctl down, pulseaudio-ctl up}; kill -44 $(pidof dwmblocks)
+
+{super + XF86AudioMute, super + XF86AudioLowerVolume, super + XF86AudioRaiseVolume}
+    {pulseaudio-ctl mute-input, pulseaudio-ctl down 15, pulseaudio-ctl up 15}; kill -44 $(pidof dwmblocks)
+
+
+### brightness control ###
+
+{XF86MonBrightnessDown, XF86MonBrightnessUp}
+    {brightness dec, brightness inc}
+
+{super + XF86MonBrightnessDown, super + XF86MonBrightnessUp}
+    {brightness bigDec, brightness bigInc}
+
+
+### touchpad toggle ###
+
+XF86TouchpadToggle
+    xinput disable "ELAN1301:00 04F3:30C6 Touchpad"
+
+super + XF86TouchpadToggle
+    xinput enable "ELAN1301:00 04F3:30C6 Touchpad"
+
+
+### Toggle wifi ###
+
+super + {w, shift + w}
+    {nmcli radio wifi on, nmcli radio wifi off}; pkill -RTMIN+12 dwmblocks
+
+
+### Music ###
+
+super + period
+    mpc toggle
+
+super + greater
+    mpc seekthrough +00:00:10
+
+super + less
+    mpc seekthrough -00:00:10
+
+super + Right
+    mpc next; notify-send --icon=~/.config/dunst/music.png "Playing $(mpc current)"
+
+super + Left
+    mpc prev; notify-send --icon=~/.config/dunst/music.png "Playing $(mpc current)"
+
+super + alt + m
+    dm-music
+
+
+#### Scripts ####
+
+super + m; {u,a}
+    {dm-usbmount -m, amu -m}
+
+super + u; {u,a}
+    {dm-usbmount -u, amu -u}
+
+super + y; {y, o}
+    {passmenu, dm-otp}
+
+super + z
+    dm-emoji
+
+super + s
+    search
+
+super + BackSpace
+    powermenu
+
+super + shift + b
+    dm-bookmarks
+
+super + o; {k, a, s, p}
+    {dm-kill, dm-pacman, sbg, alacritty -e mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]" "$(xclip -o)"}
+
+super + shift + u
+    updateBarModules
+
+alt + {equal, shift + equal, minus}
+    {opacity -s 0.9, opacity -i, opacity -d}

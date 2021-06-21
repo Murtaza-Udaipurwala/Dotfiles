@@ -1,0 +1,24 @@
+#!/bin/env python
+import requests
+import concurrent.futures
+import sys
+
+if len(sys.argv)>1:
+    query=str(sys.argv[1])
+else:
+    query=input("Enter search term: ")
+query=query.replace(' ', '+')
+
+urls=[]
+for page in range(1,6):
+    url=f"https://wallhaven.cc/api/v1/search?atleast=1920x1080&q={query}&page={page}"
+    r=requests.get(url).json()
+    for index in range(len(r['data'])):
+        urls.append(r['data'][index]['path'])
+
+def download(url):
+    r = requests.get(url)
+    open(url.split('/')[-1], 'wb').write(r.content)
+    print(f"{url} downloaded")
+
+concurrent.futures.ThreadPoolExecutor().map(download, urls)

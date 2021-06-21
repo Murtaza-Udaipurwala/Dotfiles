@@ -1,0 +1,19 @@
+#!/bin/sh
+
+mount(){
+    aft-mtp-mount "$HOME"/.local/share/cell
+    notify-send --icon=~/.config/dunst/android.png "Device mounted"
+}
+
+unmount(){
+    fusermount -u "$HOME"/.local/share/cell
+    notify-send --icon=~/.config/dunst/android.png "Device unmounted"
+}
+
+while getopts "mu" arg 2>/dev/null; do
+    case "${arg}" in
+        m) mount ;;
+        u) unmount ;;
+        *) echo "invalid option" ;;
+    esac
+done
