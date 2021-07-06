@@ -1,1 +1,1 @@
-nnoremap <leader>r :w <bar> !g++ -ulimit -Wall -Wno-unused-result % -o %:r && ./%:r < ./input.txt <CR>
+nnoremap <buffer> <leader>r :w <bar> :sp<CR> :term g++ % -o %:r && ./%:r<CR> :startinsert<CR>

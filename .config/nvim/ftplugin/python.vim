@@ -1,1 +1,1 @@
-nnoremap <leader>r :w <bar> !python3 %<CR>
+nnoremap <buffer> <leader>r :w <bar> :sp<CR> :term python3 %<CR> :startinsert<CR>

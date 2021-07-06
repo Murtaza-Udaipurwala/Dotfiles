@@ -2,6 +2,7 @@ local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
         file_sorter = require('telescope.sorters').get_fzy_sorter,
+        selection_caret = ' ',
         prompt_prefix = ' ➤ ',
         color_devicons = true,
 
@@ -20,9 +21,8 @@ require('telescope').setup {
         },
 
         file_ignore_patterns = {
+            "__pycache__",
             "node_modules",
-            "package.json",
-            "package-lock.json",
             ".mkv",
             ".png",
             ".jpg",
@@ -43,7 +43,7 @@ require('telescope').setup {
                 ["<C-k>"] = actions.move_selection_previous,
                 ["<esc>"] = actions.close,
                 ["<C-x>"] = false,
-                ["<C-q>"] = actions.send_to_qflist,
+                ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
             },
         }
     },

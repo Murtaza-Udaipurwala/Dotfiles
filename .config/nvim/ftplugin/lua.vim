@@ -1,2 +1,2 @@
-nnoremap <leader>r :w <bar> !lua %<CR>
-nnoremap <leader>l :w <bar> !love . 2&1>/dev/null<CR>
+nnoremap <buffer> <leader>r :w <bar> :sp<CR> :term lua %<CR> :startinsert<CR>
+nnoremap <buffer> <leader>l :w <bar> :sp<CR> :term love .<CR> :startinsert<CR>

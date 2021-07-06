@@ -1,4 +1,0 @@
-#!/bin/sh
-
-chosen=$(find "$HOME"/.local/bin/ -maxdepth 1 -type f | sed 's/\/home\/murtaza\/.local\/bin\///g' | fzf) || exit
-nvim "$HOME"/.local/bin/"$chosen"

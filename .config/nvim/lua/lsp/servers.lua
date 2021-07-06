@@ -9,21 +9,25 @@ require'lspconfig'.clangd.setup{
 
 
 -- python
-require'lspconfig'.jedi_language_server.setup{}
+require'lspconfig'.pylsp.setup{}
 
 
 -- html
 require'lspconfig'.html.setup {
-    cmd = { "vscode-html-languageserver", "--stdio" }
+    cmd = { "vscode-html-languageserver", "--stdio" },
+    filetypes = { "html", "htmldjango" },
+    capabilities = capabilities,
 }
 
 
 -- css
-require'lspconfig'.cssls.setup{}
+require'lspconfig'.cssls.setup{
+    cmd = { "css-languageserver", "--stdio" }
+}
 
 
 -- ts/js
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup {}
 
 
 -- bash
@@ -67,10 +71,10 @@ require'lspconfig'.sumneko_lua.setup {
 require'lspconfig'.dartls.setup{
     cmd = { "dart", vim.fn.expand('$HOME') .. "/.local/builds/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp" },
     init_options = {
-      closingLabels = false,
-      flutterOutline = false,
-      onlyAnalyzeProjectsWithOpenFiles = false,
-      outline = false,
-      suggestFromUnimportedLibraries = true
+        closingLabels = false,
+        flutterOutline = false,
+        onlyAnalyzeProjectsWithOpenFiles = false,
+        outline = false,
+        suggestFromUnimportedLibraries = true
     },
 }

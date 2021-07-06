@@ -1,8 +1,8 @@
-vim.cmd("filetype plugin indent on")
-
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.wrap = false
+vim.wo.cursorline = true
+vim.wo.colorcolumn = "80"
 
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -39,5 +39,9 @@ vim.o.expandtab = true
 vim.bo.expandtab = true
 vim.o.autoindent = true
 vim.bo.autoindent = true
+vim.o.backupcopy = "yes"
+vim.bo.backupcopy = "yes"
 
 vim.bo.swapfile = false
+
+vim.cmd("set formatoptions-=cro")

@@ -16,7 +16,8 @@ urban-https://www.urbandictionary.com/define.php?term=
 google-https://www.google.com/search?q=
 google image-https://www.google.com/search?hl=en&tbm=isch&q=
 google news-https://news.google.com/search?q=
-amazon-https://www.amazon.com/s?k=")"
+amazon-https://www.amazon.com/s?k=
+wallhaven-https://wallhaven.cc/search?q=")"
 
 engine="$(printf "$url" | cut -d'-' -f1 | dmenu -i -l 20 -p 'Choose search engine:')" || exit
 query="$(echo | dmenu -i -p "Searching $engine")" || exit

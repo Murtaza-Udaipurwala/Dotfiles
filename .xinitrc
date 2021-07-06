@@ -26,7 +26,7 @@ unclutter &
 picom &
 dunst &
 sxhkd &
-mpd &
+# mpd &
 sbg -d
 dwmblocks &
 exec dwm

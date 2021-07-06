@@ -3,5 +3,11 @@ require('nvim-treesitter.configs').setup {
         enable = true,
         -- disable = { "c", "rust" },  -- list of language that will be disabled
     },
-    autopairs = {enable = true}
+    context_commentstring = {enable = true, config = {css = '// %s'}},
+    autopairs = {enable = true},
+    indent = {enable = {
+        "javascriptreact",
+        "python"
+    }},
+    autotag = {enable = true},
 }

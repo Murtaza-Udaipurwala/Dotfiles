@@ -1,8 +1,9 @@
-vim.g.onedark_italic_functions = true
-vim.g.onedark_transparent = true
-vim.g.onedark_hide_inactive_statusline = true
-vim.g.onedark_dark_sidebar = false
-vim.g.onedark_dark_float = false
-vim.cmd('colorscheme onedark')
+vim.g.darkplus_transparent_background = true
+vim.g.darkplus_italic_comments = true
+vim.g.darkplus_italic_keywords = true
+vim.g.darkplus_italic_functions = true
+vim.g.darkplus_italic_variables = true
+vim.g.darkplus_visual_invert_selection = true
+-- vim.g.darkplus_bg_color = '#10151a'
 
-require('colors.colorizer')
+vim.cmd('colorscheme darkplus')

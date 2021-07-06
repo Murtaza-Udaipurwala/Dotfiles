@@ -1,1 +1,1 @@
-nnoremap <leader>r :w <bar> !node %<CR>
+nnoremap <buffer> <leader>r :w <bar> :!node %<CR>

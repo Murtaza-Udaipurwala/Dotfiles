@@ -11,10 +11,14 @@ Map('v', 'J', ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
 Map('v', 'K', ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
 
 -- window resize
-Map('n', '<M-j>', ':resize -2<CR>', {noremap = true, silent = true})
-Map('n', '<M-k>', ':resize +2<CR>', {noremap = true, silent = true})
-Map('n', '<M-h>', ':vertical resize -2<CR>', {noremap = true, silent = true})
-Map('n', '<M-l>', ':vertical resize +2<CR>', {noremap = true, silent = true})
+Map('n', '<C-Up>', ':resize -2<CR>', {noremap = true, silent = true})
+Map('n', '<C-Down>', ':resize +2<CR>', {noremap = true, silent = true})
+Map('n', '<C-Left>', ':vertical resize -2<CR>', {noremap = true, silent = true})
+Map('n', '<C-Right>', ':vertical resize +2<CR>', {noremap = true, silent = true})
+
+-- Move selected line / block of text in visual mode
+Map('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
+Map('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
 
 -- Better tabbing
 Map('v', '<', '<gv', {noremap = true})
@@ -24,6 +28,7 @@ Map('v', '>', '>gv', {noremap = true})
 Map('n', '<C-e>', ':Vexplore<CR>', { noremap = true, silent = true })
 
 -- terminal
+Map('n', '<leader>t', ':term', {noremap = true, silent = true})
 Map('t', '<esc>', '<C-\\><C-n>', {noremap = true})
 
 -- nvim-comment

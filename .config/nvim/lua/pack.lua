@@ -5,7 +5,7 @@ return require('packer').startup(function()
     use {'wbthomason/packer.nvim', opt = true}
 
     -- colors
-    use 'monsonjeremy/onedark.nvim'
+    use '~/projects/darkplus.nvim'
     use 'norcalli/nvim-colorizer.lua'
     use 'kyazdani42/nvim-web-devicons'
 
@@ -13,10 +13,11 @@ return require('packer').startup(function()
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     -- utils
+    use {'mattn/emmet-vim', ft = {'html', 'javascript', 'javascriptreact', 'css'}}
     use 'windwp/nvim-autopairs'
     use 'terrortylor/nvim-comment'
     use 'tpope/vim-surround'
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use 'lukas-reineke/indent-blankline.nvim'
 
     -- lsp
     use 'neovim/nvim-lspconfig'

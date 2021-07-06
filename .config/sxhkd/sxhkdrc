@@ -13,7 +13,7 @@ super + r
     $TERMINAL -e newsboat
 
 super + f
-    $TERMINAL -e bash $HOME/.config/vifm/scripts/vifmrun
+    $TERMINAL -t vifm -e bash $HOME/.config/vifm/scripts/vifmrun
 
 super + g
     pcmanfm

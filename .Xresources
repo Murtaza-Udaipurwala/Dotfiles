@@ -1,3 +1,4 @@
+#define smoky #10151a
 #define nord0 #2E3440
 #define nord1 #3B4252
 #define nord2 #434C5E
@@ -15,11 +16,9 @@
 #define nord14 #A3BE8C
 #define nord15 #B48EAD
 
-*.foreground:   nord4
-*.background:   nord0
-*.cursorColor:  nord4
-*fading: 35
-*fadeColor: nord3
+*.foreground: nord6
+*.background: smoky
+*.cursorColor: nord4
 
 *.color0: nord1
 *.color1: nord11

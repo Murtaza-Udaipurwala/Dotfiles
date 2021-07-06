@@ -47,7 +47,7 @@ end
 local function get_mode()
     local mode = api.nvim_get_mode().mode
     if trun_req(api.nvim_win_get_width(0)) then
-        return " " .. modes[mode][2]
+        return modes[mode][2]
     end
     return modes[mode][1]
 end
@@ -59,7 +59,7 @@ local function get_file_info()
     if trun_req(api.nvim_win_get_width(0)) then
         return string.format("%s %s", icon, file_name)
     end
-    return string.format("%s %s", icon, fn.expand('%:f'))
+    return string.format("%s %s", icon, fn.expand('%f'))
 end
 
 -- git branch
@@ -86,10 +86,9 @@ function Statusline(mode)
             highlight_groups.mode,
             " ",
             get_mode(),
-            " ",
+            "  ",
 
             highlight_groups.filetype,
-            "%= ",
             get_file_info(),
             " %=",
 
@@ -97,7 +96,7 @@ function Statusline(mode)
             get_git_branch(),
 
             highlight_groups.line_col,
-            "    ",
+            "  ",
             get_line_col(),
             " "
         }

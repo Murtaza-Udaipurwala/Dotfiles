@@ -1,4 +1,4 @@
-let g:vsnip_snippet_dir='$HOME/.config/nvim/snippets'
+let g:vsnip_snippet_dir = '$HOME/.config/nvim/snippets'
 
 " Jump forward or backward
 imap <expr> <C-j> vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'

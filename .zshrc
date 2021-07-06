@@ -67,11 +67,6 @@ alias yt-au='youtube-dl -o "$HOME/music/%(title)s.%(ext).s" -x -f bestaudio/best
 alias myt='mpv --ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]" "$url"'
 alias pipall="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias nt='setsid alacritty'
-alias gD='cd "$HOME"/dl'
-alias gd='cd "$HOME"/dox'
-alias gp='cd "$HOME"/pix'
-alias gP='cd "$HOME"/projects'
-alias gv='cd "$HOME"/vids'
 alias ga='cd "$HOME"/.local/share/cell'
 alias gu='cd /run/media/murtaza'
 alias gn='cd "$HOME"/.config/nvim'
@@ -131,8 +126,7 @@ bindkey '^e' edit-command-line
 
 ### ARCHIVE EXTRACTION
 # usage: ex <file>
-ex ()
-{
+ex() {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1   ;;
@@ -156,9 +150,23 @@ ex ()
   fi
 }
 
-# fzf
-source /usr/share/fzf/completion.zsh 2>/dev/null
-source /usr/share/fzf/key-bindings.zsh 2>/dev/null
+sp() {
+    chosen="$(find "$HOME"/projects -maxdepth 1 -type d ! -name '.*' | sed 's/\/home\/murtaza\/projects\///g' | fzf -i --border sharp)"
+    [ "$chosen" = "" ] || cd "$HOME"/projects/"$chosen"
+}
 
-# syntax highlighting
+sc() {
+    chosen="$(find "$HOME"/.local/bin/ -maxdepth 1 -type f | sed 's/\/home\/murtaza\/.local\/bin\///g' | fzf -i --border sharp)"
+    [ "$chosen" = "" ] || nvim "$HOME"/.local/bin/"$chosen"
+}
+
+finder() {
+    chosen="$(fzf -i --border sharp --preview 'bat --style=numbers --color=always --line-range :500 {}')"
+    [ "$chosen" = "" ] || nvim "$chosen"
+}
+
+### keybindings
+bindkey -s '^p' 'finder\n'
+
+### syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
