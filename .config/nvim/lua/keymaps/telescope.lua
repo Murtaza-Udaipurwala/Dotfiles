@@ -1,5 +1,0 @@
-Map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>', {noremap = true, silent = true})
-Map('n', '<C-g>', ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("grep for > ")})<CR>', {noremap = true, silent = true})
-Map('n', '<leader>b', ':lua require("telescope.builtin").buffers()<CR>', {noremap = true, silent = true})
-Map('n', '<leader>gw', ':lua require("telescope.builtin").grep_string { search = vim.fn.expand("<cword>") }<CR>', {noremap = true, silent = true})
-Map('n', '<leader>gn', ':lua require("plugins.telescope").search_dotfiles()<CR>', {noremap = true, silent = true})

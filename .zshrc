@@ -71,6 +71,8 @@ alias ga='cd "$HOME"/.local/share/cell'
 alias gu='cd /run/media/murtaza'
 alias gn='cd "$HOME"/.config/nvim'
 alias t='tmux'
+alias win='qemu-system-x86_64 -enable-kvm -boot menu=on -drive file="$HOME"/.local/share/virt-manager/win10.qcow2 -m 2G -cpu host -vga virtio -display sdl,gl=on'
+alias startuptime='echo "$(nvim --startuptime nvim.log -c exit && tail -n1 nvim.log | cut -d" " -f1 && rm nvim.log) msec"'
 
 # git
 alias gs='git status'
@@ -161,8 +163,8 @@ sc() {
 }
 
 finder() {
-    chosen="$(fzf -i --border sharp --preview 'bat --style=numbers --color=always --line-range :500 {}')"
-    [ "$chosen" = "" ] || nvim "$chosen"
+    chosen="$(find . -type f | fzf -i --border sharp --preview 'bat --style=numbers --color=always --line-range :500 {}')"
+    [ "$chosen" = "" ] || xdg-open "$chosen"
 }
 
 ### keybindings

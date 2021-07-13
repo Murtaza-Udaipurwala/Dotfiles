@@ -35,6 +35,7 @@ Map('t', '<esc>', '<C-\\><C-n>', {noremap = true})
 Map('n', '<leader>/', ':CommentToggle<CR>', {noremap = true, silent = true})
 Map('v', '<leader>/', ':CommentToggle<CR>', {noremap = true, silent = true})
 
+-- toggle statusline
+Map('n', '<leader>s', ':lua ToggleStatusline()<CR>', { noremap = true, silent = true })
+
 require('keymaps.navigation')
-require('keymaps.telescope')
-require('keymaps.lsp')

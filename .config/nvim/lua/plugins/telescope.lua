@@ -3,12 +3,14 @@ require('telescope').setup {
     defaults = {
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         selection_caret = ' ',
-        prompt_prefix = ' ➤ ',
+        prompt_prefix = '  ',
         color_devicons = true,
 
         file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
         grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
+
+        -- path_display = { "shorten" },
 
         vimgrep_arguments = {
             "rg",
@@ -64,5 +66,12 @@ M.search_dotfiles = function()
         cwd = "$HOME/.config/nvim/",
     })
 end
+
+local map = vim.api.nvim_set_keymap
+map('n', '<C-p>', ':lua require("telescope.builtin").find_files()<CR>', {noremap = true, silent = true})
+map('n', '<C-g>', ':lua require("telescope.builtin").grep_string({ search = vim.fn.input("grep for > ")})<CR>', {noremap = true, silent = true})
+map('n', '<leader>b', ':lua require("telescope.builtin").buffers()<CR>', {noremap = true, silent = true})
+map('n', '<leader>gw', ':lua require("telescope.builtin").grep_string { search = vim.fn.expand("<cword>") }<CR>', {noremap = true, silent = true})
+map('n', '<leader>gn', ':lua require("plugins.telescope").search_dotfiles()<CR>', {noremap = true, silent = true})
 
 return M

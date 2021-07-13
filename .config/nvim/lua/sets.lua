@@ -43,5 +43,7 @@ vim.o.backupcopy = "yes"
 vim.bo.backupcopy = "yes"
 
 vim.bo.swapfile = false
+vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 vim.cmd("set formatoptions-=cro")
+vim.cmd("filetype plugin indent on")

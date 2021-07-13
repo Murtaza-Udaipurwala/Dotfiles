@@ -1,6 +1,0 @@
-require('plugins.treesitter')
-require('plugins.telescope')
-require('plugins.autopairs')
-require('plugins.indent')
-require('plugins.comment')
-require('plugins.colorizer')

@@ -1,64 +1,23 @@
------------------------------------------------------------------------------
--- LSP Diagnostics
------------------------------------------------------------------------------
-vim.fn.sign_define(
-    "LspDiagnosticsSignError",
-    {texthl = "LspDiagnosticsSignError", text = " ", numhl = "LspDiagnosticsSignError"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignWarning",
-    {texthl = "LspDiagnosticsSignWarning", text = " ", numhl = "LspDiagnosticsSignWarning"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignInformation",
-    {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignHint",
-    {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"}
-)
+local map = vim.api.nvim_set_keymap
 
------------------------------------------------------------------------------
--- symbols for autocomplete
------------------------------------------------------------------------------
-local lsp_symbols = {
-    Class = "   (Class)",
-    Color = "   (Color)",
-    Constant = "   (Constant)",
-    Constructor = "   (Constructor)",
-    Enum = " 練 (Enum)",
-    EnumMember = "   (EnumMember)",
-    Field = " ﴲ  (Field)",
-    File = "   (File)",
-    Folder = "   (Folder)",
-    Function = "   (Function)",
-    Interface = " ﰮ  (Interface)",
-    Keyword = "   (Keyword)",
-    Method = "   (Method)",
-    Module = "   (Module)",
-    Property = " 襁 (Property)",
-    Snippet = " ﬌  (Snippet)",
-    Struct = " ﳤ  (Struct)",
-    Text = "   (Text) ",
-    Unit = "   (Unit)",
-    Value = "   (Value)",
-    Variable = "[] (Variable)",
-    Reference = "   (Reference)",
-    Event = " ﲀ  (Event)",
-    Operator = "   (Operator)",
-    TypeParameter = "   (TypeParameter)"
-}
-
-for kind, symbol in pairs(lsp_symbols) do
-    local kinds = vim.lsp.protocol.CompletionItemKind
-    local index = kinds[kind]
-
-    if index ~= nil then
-        kinds[index] = symbol
-    end
-end
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', {noremap = true, silent = true})
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
+map('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {noremap = true, silent = true})
+map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true, silent = true})
+map('n', '<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>', {noremap = true, silent = true})
+map('n', '<leader>ir', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true, silent = true})
+-- map('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {noremap = true, silent = true})
+-- map('n', '<leader>gw', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', {noremap = true, silent = true})
+-- map('n', '<leader>gW', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', {noremap = true, silent = true})
+-- map('n', '<leader>ee', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', {noremap = true, silent = true})
+-- map('n', '<leader>ai', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>', {noremap = true, silent = true})
+-- map('n', '<leader>ao', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>', {noremap = true, silent = true})
 
 vim.g.user_emmet_leader_key='<C-Z>'
+vim.g.vsnip_snippet_dir = '$HOME/.config/nvim/snippets'
 
-require('lsp.compe')
+require('lsp.aesthetics')
 require('lsp.servers')
